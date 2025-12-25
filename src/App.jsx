@@ -1,10 +1,11 @@
-import React from 'react';
-import Navbar from './components/Navbar';
+import { BrowserRouter as Router, Routes, Route } from "react-router";
+import Navbar from "./components/Navbar";
 
 // TODO: Import react router dom here
-
-import Footer from './components/Footer';
-import './styles/App.css';
+import Home from "./pages/Home";
+import Footer from "./components/Footer";
+import "./styles/App.css";
+import Projects from "./pages/Projects";
 
 function App() {
   return (
@@ -12,10 +13,14 @@ function App() {
       <div className="app">
         <Navbar />
         <main className="main-content">
-         {/* TODO: Add react router dom routes here */}
-         
+          {/* TODO: Add react router dom routes here */}
+          <Routes>
+            {" "}
+            <Route path="/" element={<Home />} />
+            <Route path="/projects" element={<Projects />} />
+          </Routes>
         </main>
-        <Footer />
+        <Footer ft={Footer} />
       </div>
     </Router>
   );

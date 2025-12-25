@@ -1,20 +1,34 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 
 // TODO: Import axios here
+import axios from "axios";
 
-
-import ProjectCard from '../components/ProjectCard';
-import '../styles/Projects.css';
+import ProjectCard from "../components/ProjectCard";
+import "../styles/Projects.css";
 
 const Projects = () => {
   const [repos, setRepos] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
- // TODO: Fetch repositories from GitHub API using axios and useEffect and set the repos state, also handle the loading and error states
- // API: https://api.github.com/users/YOUR_GITHUB_USERNAME/repos?per_page=10&sort=updated
+  // TODO: Fetch repositories from GitHub API using axios and useEffect and set the repos state, also handle the loading and error states
+  // API: https://api.github.com/users/YOUR_GITHUB_USERNAME/repos?per_page=10&sort=updated
 
-
+  useEffect(() => {
+    const fetchRepo = async () => {
+      try {
+        setLoading(true);
+        const response = await axios.get(
+          "https://api.github.com/users/libanyousof/repos?per_page=10&sort=updated"
+        );
+        setRepos(response.data);
+        setLoading(false);
+      } catch (err) {
+        setError(err);
+      }
+    };
+    fetchRepo();
+  }, []);
 
   if (loading) {
     return <div className="loading">Loading repositories...</div>;
@@ -28,9 +42,7 @@ const Projects = () => {
     <div className="projects-container">
       <div className="projects-header">
         <h1 className="projects-title">GitHub Projects</h1>
-        <p className="projects-subtitle">
-          My latest GitHub repositories.
-        </p>
+        <p className="projects-subtitle">My latest GitHub repositories.</p>
       </div>
 
       <div className="projects-grid">

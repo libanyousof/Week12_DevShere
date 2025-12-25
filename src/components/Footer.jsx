@@ -1,6 +1,6 @@
-import React from 'react';
-import { Heart, Github } from 'lucide-react';
-import '../styles/Footer.css';
+import React from "react";
+import { Heart, Github } from "lucide-react";
+import "../styles/Footer.css";
 
 const Footer = () => {
   return (
@@ -10,7 +10,7 @@ const Footer = () => {
           Built with <Heart size={16} className="heart-icon" /> using React
         </p>
         <a
-          href="https://github.com/duraanali"
+          href="https://github.com/libanyousof"
           target="_blank"
           rel="noopener noreferrer"
           className="github-link"

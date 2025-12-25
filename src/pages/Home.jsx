@@ -1,28 +1,52 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 // TODO: Import axios here
-
-import moment from 'moment';
-import { Users, Star, GitBranch, MapPin, Calendar, ExternalLink } from 'lucide-react';
-import '../styles/Home.css';
+import axios from "axios";
+import moment from "moment";
+import {
+  Users,
+  Star,
+  GitBranch,
+  MapPin,
+  Calendar,
+  ExternalLink,
+} from "lucide-react";
+import "../styles/Home.css";
 
 const Home = () => {
   const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
   // TODO: Fetch user data from GitHub API using axios and useEffect and set the user state, also handle the loading and error states
-    // API: https://api.github.com/users/YOUR_USERNAME
+  // API: https://api.github.com/users/YOUR_USERNAME
+  // const [showGithub, setGithub] = useState(null);
 
+  useEffect(() => {
+    const fetchGithubProfile = async () => {
+      try {
+        setLoading(true);
 
+        const response = await axios.get(
+          " https://api.github.com/users/libanyousof"
+        );
+        setUser(response.data);
+        setLoading(false);
+      } catch (err) {
+        setError(err);
+      }
+    };
+
+    fetchGithubProfile();
+  }, []);
 
   if (loading) {
     return <div className="loading">Loading profile data...</div>;
   }
 
   if (error) {
-    return <div className="error">{error}</div>;
+    return <div className="error">{setError(error)}</div>;
   }
 
   return (
@@ -32,10 +56,10 @@ const Home = () => {
           <div className="profile-card">
             <div className="profile-header">
               <div className="avatar-container">
-                <img 
-                  src={user.avatar_url} 
-                  alt={`${user.name}'s avatar`} 
-                  className="avatar" 
+                <img
+                  src={user.avatar_url}
+                  alt={`${user.name}'s avatar`}
+                  className="avatar"
                 />
               </div>
               <div className="profile-info">
@@ -49,13 +73,15 @@ const Home = () => {
                 )}
                 <p className="profile-joined">
                   <Calendar size={16} />
-                  <span>Joined on {moment(user.created_at).format('MMMM D, YYYY')}</span>
+                  <span>
+                    Joined on {moment(user.created_at).format("MMMM D, YYYY")}
+                  </span>
                 </p>
               </div>
             </div>
-            
+
             <div className="profile-bio">
-              <p>{user.bio || 'No bio available'}</p>
+              <p>{user.bio || "No bio available"}</p>
             </div>
 
             <div className="profile-stats">
@@ -91,10 +117,16 @@ const Home = () => {
                 )}
                 {user.blog && (
                   <p className="profile-website">
-                    <span>Website:</span> 
-                    <a href={user.blog.startsWith('http') ? user.blog : `https://${user.blog}`} 
-                       target="_blank" 
-                       rel="noopener noreferrer">
+                    <span>Website:</span>
+                    <a
+                      href={
+                        user.blog.startsWith("http")
+                          ? user.blog
+                          : `https://${user.blog}`
+                      }
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
                       {user.blog} <ExternalLink size={14} />
                     </a>
                   </p>
@@ -103,10 +135,10 @@ const Home = () => {
             )}
 
             <div className="profile-actions">
-              <a 
-                href={user.html_url} 
+              <a
+                href={user.html_url}
                 className="btn btn-secondary"
-                target="_blank" 
+                target="_blank"
                 rel="noopener noreferrer"
               >
                 Visit GitHub

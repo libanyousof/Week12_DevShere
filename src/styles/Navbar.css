@@ -38,20 +38,20 @@
   margin: 0;
 }
 
-.navbar-item a {
+.navbar-item {
   color: var(--white);
   font-weight: 500;
   position: relative;
   padding-bottom: 5px;
 }
 
-.navbar-item a:hover,
-.navbar-item a.active {
+.navbar-item:hover,
+.navbar-item.active {
   color: var(--accent-color);
 }
 
-.navbar-item a::after {
-  content: '';
+.navbar-item::after {
+  content: "";
   position: absolute;
   width: 0;
   height: 2px;
@@ -61,8 +61,8 @@
   transition: var(--transition);
 }
 
-.navbar-item a:hover::after,
-.navbar-item a.active::after {
+.navbar-item:hover::after,
+.navbar-item.active::after {
   width: 100%;
 }
 
@@ -79,7 +79,7 @@
     gap: 1.5rem;
   }
 
-  .navbar-item a {
+  .navbar-item {
     font-size: 0.95rem;
   }
 }

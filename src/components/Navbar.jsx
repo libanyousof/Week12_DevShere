@@ -1,10 +1,10 @@
-import React from 'react';
-
+import React from "react";
 // TODO: Import LINK from react router dom components
-import { useLocation } from 'react-router-dom'
+import { Link } from "react-router";
+import { useLocation } from "react-router-dom";
 
-import { Github } from 'lucide-react';
-import '../styles/Navbar.css';
+import { Github } from "lucide-react";
+import "../styles/Navbar.css";
 
 const Navbar = () => {
   const location = useLocation();
@@ -18,12 +18,12 @@ const Navbar = () => {
         </Link>
 
         <ul className="navbar-menu">
-          <li className="navbar-item">
-           {/* TODO: Add the home route here */}
-          </li>
-          <li className="navbar-item">
-            {/* TODO: Add the projects route here */}
-          </li>
+          <Link to="/" className="navbar-item">
+            Home
+          </Link>
+          <Link to="/projects" className="navbar-item">
+            Projects
+          </Link>
         </ul>
       </div>
     </nav>
